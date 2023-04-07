@@ -7,6 +7,11 @@ const app = express();
 const port = process.env.port || 3000;
 const relativePath = path.resolve("./");
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
+
 app.get("/", (req, res) => {
   res.sendFile(path.join(relativePath, "/index.html"));
 });

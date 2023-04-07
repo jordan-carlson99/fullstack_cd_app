@@ -21,6 +21,15 @@
       <input type="text" id="search-val-artist" placeholder="enter artist to search" on/>
       <input class="btn btn-primary" type="button" onclick="getArtists()" value="search"></input>
     </form>
+    <form class="container-fluid" id="append">
+      <input type="text" id="artist-name" placeholder="artist name" name="artist_name">
+      <input type="text" id="album-name" placeholder="album name" name="album_name">
+      <input type="text" id="rating" placeholder="rating" name="rating">
+      <input type="text" id="year-released" placeholder="year released" name="release_year">
+      <input type="text" id="genre" placeholder="genre" name="genre">
+      <input type="text" id="active" placeholder="are they active" name="is_active">
+      <input class="btn btn-primary" type="button" onclick="appendDB()" value="add"></input>
+    </form>
     <div class="container-fluid" id="results"></div>
   </body>
 </html>

@@ -51,3 +51,39 @@ async function getArtists() {
     document.getElementById("results").appendChild(container);
   });
 }
+
+async function appendDB() {
+  let formObj = {};
+  const data = new FormData(document.getElementById("append"));
+  data.forEach((value, key) => (formObj[key] = value.toLowerCase()));
+  formObj.release_year = `${formObj.release_year}-01-01`;
+  let ifArtist = await fetch(
+    `http://127.0.0.10:3500/api/exactArtist/${formObj.artist_name}`
+  );
+  // console.log(ifArtist.json().value.length < 1);
+  if (ifArtist.ok) {
+    console.log("send to post");
+    id = await ifArtist.json();
+    fetch(`http://127.0.0.10:3500/api/append/true/${id[0].artist_id}`, {
+      method: "POST",
+      body: formObj,
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "*",
+        "Access-Control-Allow-Credentials": "true",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      },
+    });
+  } else {
+    id = await ifArtist.json();
+    fetch;
+  }
+}
+//{
+//   "artist_name": "fgse",
+//   "album_name": "nam",
+//   "rating": "3",
+//   "release_year": "1643",
+//   "genre": "tt"
+// }

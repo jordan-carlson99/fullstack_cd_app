@@ -1,7 +1,9 @@
 async function getAlbums() {
   document.getElementById("results").innerHTML = "";
   let search = document.getElementById("search-val").value || "all";
-  let response = await fetch(`/api/albums/${search}`);
+  let response = await fetch(
+    `https://cd-stackapi.onrender.com/api/albums/${search}`
+  );
   let data = await response.json();
   data.forEach((element) => {
     let color = "green";

@@ -29,16 +29,16 @@ app.get("/api/albums/:search", async (req, res) => {
   }
 });
 
-app.get("/api/artists", async (req, res) => {
-  let data = await client.query("SELECT * FROM total");
-  res.send(data.rows);
-});
-
 app.get("/api/artists/:search", async (req, res) => {
-  let data = await client.query(
-    `SELECT * FROM total WHERE artist_name LIKE '%${req.params.search}%'`
-  );
-  res.send(data.rows);
+  if (req.params.search == "all") {
+    let data = await client.query(`SELECT * FROM total`);
+    res.send(data.rows);
+  } else {
+    let data = await client.query(
+      `SELECT * FROM total WHERE artist_name LIKE '%${req.params.search}%'`
+    );
+    res.send(data.rows);
+  }
 });
 
 app.use("*", (req, res) => {
@@ -49,6 +49,6 @@ app.get("/", (req, res) => {
   res.send("api good");
 });
 
-app.listen(port, () => {
+app.listen(port, "127.0.0.10", () => {
   console.log(`started on ${port}`);
 });

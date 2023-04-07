@@ -1,7 +1,7 @@
 async function getAlbums() {
   document.getElementById("results").innerHTML = "";
   let search = document.getElementById("search-val").value || "all";
-  let response = await fetch(`http://127.0.0.10:3500/api/albums/${search}`);
+  let response = await fetch(`/api/albums/${search}`);
   let data = await response.json();
   data.forEach((element) => {
     let color = "green";

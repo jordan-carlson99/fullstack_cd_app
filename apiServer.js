@@ -49,6 +49,6 @@ app.get("/", (req, res) => {
   res.send("api good");
 });
 
-app.listen(port, "127.0.0.10", () => {
+app.listen(port, () => {
   console.log(`started on ${port}`);
 });

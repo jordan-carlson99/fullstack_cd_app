@@ -1,9 +1,9 @@
-// let apiLink = `http://127.0.0.10:3500/api/albums/${search}`
+let apiLink = `http://127.0.0.10:3500/api/albums/${search}`;
 
 async function getAlbums() {
   document.getElementById("results").innerHTML = "";
   let search = document.getElementById("search-val").value || "all";
-  let response = await fetch(`http://127.0.0.10:3500/api/albums/${search}`);
+  let response = await fetch(`${apiLink}/api/albums/${search}`);
   let data = await response.json();
   data.forEach((element) => {
     let color = "green";
@@ -29,7 +29,7 @@ async function getAlbums() {
 async function getArtists() {
   document.getElementById("results").innerHTML = "";
   let search = document.getElementById("search-val-artist").value || "all";
-  let response = await fetch(`http://127.0.0.10:3500/api/artists/${search}`);
+  let response = await fetch(`${apiLink}/api/artists/${search}`);
   let data = await response.json();
   data.forEach((element) => {
     let color = "green";
@@ -58,13 +58,13 @@ async function appendDB() {
   data.forEach((value, key) => (formObj[key] = value.toLowerCase()));
   formObj.release_year = `${formObj.release_year}-01-01`;
   let ifArtist = await fetch(
-    `http://127.0.0.10:3500/api/exactArtist/${formObj.artist_name}`
+    `${apiLink}/api/exactArtist/${formObj.artist_name}`
   );
   // console.log(ifArtist.json().value.length < 1);
   if (ifArtist.ok) {
     console.log("send to post");
     id = await ifArtist.json();
-    fetch(`http://127.0.0.10:3500/api/append/true/${id[0].artist_id}`, {
+    fetch(`${apiLink}/api/append/true/${id[0].artist_id}`, {
       method: "POST",
       body: formObj,
       headers: {
